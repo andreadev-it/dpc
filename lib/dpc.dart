@@ -4,3 +4,5 @@ library;
 
 export 'combinators.dart';
 export 'strings/parsers.dart';
+export 'utils.dart';
+export 'src/dpc_base.dart' show CombRes, CombClosure;

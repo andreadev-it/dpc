@@ -45,3 +45,23 @@ CombClosure<List<dynamic>> list(List<CombClosure<dynamic>> parsers) {
     return (totalRes, tail);
   };
 }
+
+/// Tries to run a parser multiple times
+CombClosure<List<T>> many<T>(CombClosure<T> parser) {
+  return (String text) {
+    List<T> totalRes = [];
+    var tail = text;
+
+    try {
+      while (tail.length > 0) {
+        var (res, parserTail) = parser(tail);
+        totalRes.add(res);
+        tail = parserTail;
+      }
+    } catch (e) {
+      // do nothing, actually
+    }
+
+    return (totalRes, tail);
+  };
+}

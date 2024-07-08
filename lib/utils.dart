@@ -27,3 +27,28 @@ CombClosure<List<dynamic>> clear(CombClosure<List<dynamic>> parser) {
     return (res, tail);
   };
 }
+
+/// Print the parser result for debugging
+CombClosure<T> debug<T>(CombClosure<T> parser) {
+  return (String text) {
+    var (res, tail) = parser(text);
+
+    print("Result: $res");
+    print("Tail: $tail");
+
+    return (res, tail);
+  };
+}
+
+/// Only pass if the whole string was consumed
+CombClosure<T> fullMatch<T>(CombClosure<T> parser) {
+  return (String text) {
+    var (res, tail) = parser(text);
+
+    if (tail != "") {
+      throw Exception("The input didn't match completely");
+    }
+
+    return (res, tail);
+  };
+}

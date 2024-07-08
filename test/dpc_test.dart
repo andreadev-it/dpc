@@ -49,6 +49,19 @@ void main() {
     });
   });
 
+  group("Combinators", () {
+
+    test('MANY combinator', () {
+      var parser = many(tag("#"));
+      var input = "### Heading";
+
+      var (res, tail) = parser(input);
+
+      expect(res.length, (l) => l == 3);
+      expect(tail, (t) => t == " Heading");
+    });
+  });
+
   group("README examples", () {
     test('Markdown links', () {
       final parser = clear(list([
