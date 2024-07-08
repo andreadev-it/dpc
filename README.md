@@ -38,8 +38,12 @@ Parsers:
 Combinators:
 - opt
 - alt
-- map
 - list
+
+Utilities:
+- map
+- del
+- clear
 
 ## Usage
 
